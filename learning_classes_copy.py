@@ -6,8 +6,7 @@ import pygame
 
 pygame.init()
 
-
-#region: color library
+# region: color library
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
@@ -18,7 +17,7 @@ orange = (255, 165, 0)
 gray = (72, 84, 84)
 dark_gray = (72, 84, 84)
 darker_gray = (55, 58, 62)
-#endregion
+# endregion
 tap_damage = 1
 
 SCREEN_WIDTH = 600
@@ -35,15 +34,16 @@ fps = 60
 class ScrollingButton:
     def __init__(self, x_pos, y_pos, image, name, description, level, dps, surface):
         self.x_pos = x_pos
-        self.y_pos = y_pos        
+        self.y_pos = y_pos
         self.image = image
         self.name = name
         self.description = description
         self.level = level
         self.dps = dps
-        self.surface = surface # Pass the surface as a parameter
+        self.surface = surface  # Pass the surface as a parameter
         self.draw()
-    #main thing is draw these to scrollable content and not the screen
+
+    # main thing is draw these to scrollable content and not the screen
     def draw(self):
         button_rect = pygame.Rect((self.x_pos, self.y_pos), (580, 55))
         pygame.draw.rect(self.surface, darker_gray, button_rect, 0, 10)
@@ -64,6 +64,7 @@ class ScrollingButton:
             button_dps = font.render(self.dps, True, white)
             self.surface.blit(button_dps, (self.x_pos + 400, self.y_pos + 30))
 
+
 class UpgradeButton:
     def __init__(self, x_pos, y_pos, currency_image, upgrade_text, upgrade_cost, surface):
         self.x_pos = x_pos
@@ -72,11 +73,11 @@ class UpgradeButton:
         self.upgrade_text = upgrade_text
         self.upgrade_cost = upgrade_cost
         self.surface = surface
-        self.rect = pygame.Rect((self.x_pos, self.y_pos), (117, 49))   # Create a pygame.Rect for the button
+        self.rect = pygame.Rect((self.x_pos, self.y_pos), (117, 49))  # Create a pygame.Rect for the button
         self.draw()
 
     def draw(self):
-        #button_rect = pygame.Rect((self.x_pos, self.y_pos), (117, 49))
+        # button_rect = pygame.Rect((self.x_pos, self.y_pos), (117, 49))
         pygame.draw.rect(self.surface, gray, self.rect, 0, 10)
         pygame.draw.rect(self.surface, white, self.rect, 2, 10)
 
@@ -90,7 +91,8 @@ class UpgradeButton:
         if self.upgrade_text is not None:
             upgrade_text = font2.render(self.upgrade_text, True, white)
             text_rect = upgrade_text.get_rect(center=(text_center_x, self.y_pos + 17))
-            self.surface.blit(upgrade_text, text_rect.topleft)  # Use the top-left corner of the text rect for blitting       #(self.x_pos + 58, self.y_pos + 5))
+            self.surface.blit(upgrade_text,
+                              text_rect.topleft)  # Use the top-left corner of the text rect for blitting       #(self.x_pos + 58, self.y_pos + 5))
         if self.upgrade_cost is not None:
             upgrade_cost = font2.render(self.upgrade_cost, True, white)
             self.surface.blit(upgrade_cost, (self.x_pos + 80, self.y_pos + 33))
@@ -99,11 +101,12 @@ class UpgradeButton:
         # Check if the mouse is over the button
         mouse_x, mouse_y = pygame.mouse.get_pos()
         return self.rect.collidepoint(mouse_x, mouse_y)
-        
+
+
 class Player:
     def __init__(self):
         global tap_damage
-        self.player_image = "G:\Python\Idle Game\Images\player-export.png"
+        self.player_image = "Images\player-export.png"
 
     def draw_player(self):
         player_image = pygame.image.load(self.player_image)
@@ -112,13 +115,14 @@ class Player:
     def render(self):
         self.draw_player()
 
+
 class Bad:
     def __init__(self):
         global tap_damage
         self.health = 7
         self.max_health = 7
         self.health_bar_length = 150
-        self.bad_guy = "G:\Python\Idle Game\Images\skeleton-export.png"
+        self.bad_guy = "images/skeleton-export.png"
 
     def draw_health_bar(self):
         pygame.draw.rect(screen, black, [350, 250, self.health_bar_length, 20], 0, 10)
@@ -132,18 +136,18 @@ class Bad:
         bad_name_text = font.render('Skeleton', True, white)
         screen.blit(bad_name_text, (350, 270))
         screen.blit(bad_guy_image, (400, 300))
-        
+
     def render(self):
         self.draw_health_bar()
         self.draw_bad_guy()
 
-#bad_health = BadHealth()
+# bad_health = BadHealth()
 
 # run = True
 # while run:
 #     screen.fill('black')
 #     timer.tick(fps)
-    
+
 #     for event in pygame.event.get():
 #         if event.type == pygame.QUIT:
 #             run = False
@@ -159,12 +163,11 @@ class Bad:
 #     pygame.display.flip()
 # pygame.quit()
 
-#bad_health = BadHealth()
-#bad_health.render()
+# bad_health = BadHealth()
+# bad_health.render()
 
 
-
-#region tutorial
+# region tutorial
 # WIDTH = 500
 # HEIGHT = 500
 # screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -187,7 +190,7 @@ class Bad:
 #     def draw(self):
 #         button_text = font.render(self.text, True, 'black')
 #         button_rect = pygame.rect.Rect((self.x_pos, self.y_pos), (150, 25))
-#         if self.enabled:    
+#         if self.enabled:
 #             if self.check_click():
 #                 pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
 #             else:
@@ -205,29 +208,29 @@ class Bad:
 #             return True
 #         else:
 #             return False
-#endregion
+# endregion
 
-#region
-    # my_button = Button('Click Me!', 10, 10, button1_enabled)
-    # my_button2 = Button('Click Me Too!', 10, 40, button2_enabled)
-    # my_button3 = Button('Click Me Three!', 10, 70, True)
+# region
+# my_button = Button('Click Me!', 10, 10, button1_enabled)
+# my_button2 = Button('Click Me Too!', 10, 40, button2_enabled)
+# my_button3 = Button('Click Me Three!', 10, 70, True)
 
-    # # this is like a toggle. pressing button3 will make button with disabled.
-    # if pygame.mouse.get_pressed()[0] and new_press:
-    #     new_press = False
-    #     if my_button3.check_click():
-    #         if button1_enabled:
-    #             button1_enabled = False
-    #             button2_enabled = False
-    #         else:
-    #             button1_enabled = True
-    #             button2_enabled = True
-    # if not pygame.mouse.get_pressed()[0] and not new_press:
-    #     new_press = True
+# # this is like a toggle. pressing button3 will make button with disabled.
+# if pygame.mouse.get_pressed()[0] and new_press:
+#     new_press = False
+#     if my_button3.check_click():
+#         if button1_enabled:
+#             button1_enabled = False
+#             button2_enabled = False
+#         else:
+#             button1_enabled = True
+#             button2_enabled = True
+# if not pygame.mouse.get_pressed()[0] and not new_press:
+#     new_press = True
 
-    # # this is doing a function for the duration of the button being pressed.
-    # # in this case it just prints some text while you're holding button2 down.
-    # if my_button2.check_click():
-    #     button_text = font.render('Button 2 is being pressed', True, 'black')
-    #     screen.blit(button_text, (100, 200))
-#endregion
+# # this is doing a function for the duration of the button being pressed.
+# # in this case it just prints some text while you're holding button2 down.
+# if my_button2.check_click():
+#     button_text = font.render('Button 2 is being pressed', True, 'black')
+#     screen.blit(button_text, (100, 200))
+# endregion
